@@ -1,0 +1,43 @@
+# this service gets all records unfiltered
+- name: GetAllProducts
+  route: /declarative/product
+  method: get
+  script: SELECT * FROM Product
+  
+# this service gets one record by id
+- name: GetProductById
+  route: /declarative/product/:productId
+  method: get
+  script: SELECT * FROM Product WHERE Id = ?
+  params:
+  - productId
+  
+# this service adds new record to datanase
+- name: CreateProduct
+  route: /declarative/product/
+  method: post
+  script: INSERT INTO Product (Id, ProductName, SupplierId, CategoryId) VALUES (?, ?, ?, ?)
+  params:
+  - Id
+  - ProductName
+  - SupplierId
+  - CategoryId
+  
+# this service updates a record by id
+- name: CreateProduct
+  route: /declarative/product/:productId
+  method: patch
+  script: UPDATE Product SET ProductName = ?, SupplierId = ?, CategoryId = ? WHERE Id = ?
+  params:
+  - ProductName
+  - SupplierId
+  - CategoryId
+  - productId
+
+# this service deletes a record by id
+- name: DeleteProduct
+  route: /declarative/product/:productId
+  method: delete
+  script: DELETE FROM Product WHERE Id = ?
+  params:
+  - productId

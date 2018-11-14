@@ -1,0 +1,43 @@
+# this service gets all records unfiltered
+- name: GetAllEmployees
+  route: /declarative/employee
+  method: get
+  script: SELECT * FROM Employee
+  
+# this service gets one record by id
+- name: GetEmployeeById
+  route: /declarative/employee/:employeeId
+  method: get
+  script: SELECT * FROM Employee WHERE Id = ?
+  params:
+  - employeeId
+  
+# this service adds new record to datanase
+- name: CreateEmployee
+  route: /declarative/employee/
+  method: post
+  script: INSERT INTO Employee (Id, FirstName, LastName, Title) VALUES (?, ?, ?, ?)
+  params:
+  - Id
+  - FirstName
+  - LastName
+  - Title
+  
+# this service updates a record by id
+- name: CreateEmployee
+  route: /declarative/employee/:employeeId
+  method: patch
+  script: UPDATE Employee SET FirstName = ?, LastName = ?, Title = ? WHERE Id = ?
+  params:
+  - FirstName
+  - LastName
+  - Title
+  - employeeId
+
+# this service deletes a record by id
+- name: CreateEmployee
+  route: /declarative/employee/:employeeId
+  method: delete
+  script: DELETE FROM Employee WHERE Id = ?
+  params:
+  - employeeId
